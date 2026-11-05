@@ -2,62 +2,9 @@ MyRedis 2.0
 
 A Redis-inspired key-value database built from scratch using Java.
 
-Features
+Overview
 
-- TCP client-server communication
-- SET, GET and DEL commands
-- EXISTS and KEYS commands
-- EXPIRE and TTL support
-- Automatic expiration cleanup
-- Multithreaded client handling
-- Data persistence using file handling
-- Database recovery after server restart
-- RESP2 protocol subset
-
-Technologies Used
-
-- Java
-- Socket Programming
-- Multithreading
-- ConcurrentHashMap
-- File Handling
-- RESP Protocol
-
-How to Run
-
-Compile the project:
-
-mkdir out
-javac -d out src/*.java
-
-Start the server:
-
-java -cp out RedisServer
-
-Open another terminal and start the client:
-
-java -cp out RedisClient
-
-Example Commands
-
-SET name Aditya
-GET name
-EXISTS name
-EXPIRE name 30
-TTL name
-DEL name
-DBSIZE
-PING
-
-Project Purpose
-
-This project was developed to understand how a simple Redis-like database works internally, including networking, command handling, expiration, concurrency and persistence.
-
-Limitations
-
-This is an educational Redis-inspired implementation. It is not a complete replacement for Redis.MyRedis 2.0
-
-A Redis-inspired key-value database built from scratch using Java.
+MyRedis is an educational project that demonstrates how a simple in-memory key-value database works. It uses Java socket programming to communicate between a client and server.
 
 Features
 
@@ -70,6 +17,7 @@ Features
 - Data persistence using file handling
 - Database recovery after server restart
 - RESP2 protocol subset
+- SAVE, FLUSHDB and DBSIZE commands
 
 Technologies Used
 
@@ -80,31 +28,68 @@ Technologies Used
 - File Handling
 - RESP Protocol
 
+Project Structure
+
+MyRedis/
+├── Data/
+├── Out/
+├── Src/
+│   ├── RedisServer.java
+│   ├── RedisClient.java
+│   ├── RedisCommandHandler.java
+│   ├── RedisDatabase.java
+│   ├── RedisEntry.java
+│   ├── PersistenceManager.java
+│   └── RespProtocol.java
+├── .gitignore
+└── README.md
+
 How to Run
 
-Compile the project:
+Make sure Java JDK is installed.
 
-mkdir out
-javac -d out src/*.java
+Open the terminal in the project root folder.
 
-Start the server:
+1. Compile the project
 
-java -cp out RedisServer
+mkdir Out
+javac -d Out Src\*.java
 
-Open another terminal and start the client:
+2. Start the server
 
-java -cp out RedisClient
+java -cp Out RedisServer
+
+3. Start the client
+
+Open another terminal in the project root folder:
+
+java -cp Out RedisClient
 
 Example Commands
 
+PING
 SET name Aditya
 GET name
 EXISTS name
 EXPIRE name 30
 TTL name
-DEL name
+KEYS *
 DBSIZE
-PING
+DEL name
+SAVE
+FLUSHDB
+
+Testing
+
+The project was manually tested for:
+
+- Basic SET and GET operations
+- Key deletion and existence checks
+- Key expiration
+- Database size and key listing
+- Saving and recovering data after server restart
+- Multiple client connections
+- Invalid command handling
 
 Project Purpose
 
@@ -112,4 +97,11 @@ This project was developed to understand how a simple Redis-like database works 
 
 Limitations
 
-This is an educational Redis-inspired implementation. It is not a complete replacement for Redis.
+This is an educational Redis-inspired implementation. It supports only a subset of Redis commands and RESP2 functionality. It is not a complete replacement for Redis.
+
+Future Improvements
+
+- Add automated unit tests
+- Improve error handling
+- Add more Redis commands
+- Improve client interface
